@@ -3,7 +3,8 @@ from sqlalchemy import (
     Index,
     Integer,
     Text,
-    )
+    DateTime)
+import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -18,10 +19,9 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
+class Task(Base):
+    __tablename__ = 'tasks'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
-
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+    summary = Column(Text)
+    created_at = Column(DateTime, default=datetime.datetime.now())
+    updated_at = Column(DateTime, default=datetime.datetime.now())
