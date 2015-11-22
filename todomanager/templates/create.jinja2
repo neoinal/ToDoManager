@@ -1,0 +1,22 @@
+{% extends 'base.jinja2' %}
+
+{%- block container %}
+<div class="row">
+    <form name="create" action="{{ request.route_url('create') }}" method="post" class="form-horizontal col-md-8 col-md-offset-2">
+        <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}" />
+    {%- if result != null %}
+        <div class="alert{% if result['status'] == 'success' %} alert-success{% else %} alert-danger{% endif %}" id="result-alert" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden>&times;</span></button>
+            {{ result['message']|e }}
+        </div>
+    {%- endif %}
+        <div class="form-group">
+            <label class="control-label" for="id_summary">ToDo 内容</label>
+            <textarea id="id_summary" name="summary" class="form-control" rows="10" cols="40" required="required"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">登録</button>
+        </div>
+    </form>
+</div>
+{%- endblock %}
