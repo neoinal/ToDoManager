@@ -1,0 +1,16 @@
+{% extends 'base.jinja2' %}
+
+{%- block container %}
+<div class="row">
+    {%- for task in tasks -%}
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>{{ task.summary }}</p>
+                <a href="{{ request.route_url('edit', task_id=task.id) }}" class="btn btn-success pull-right">編集</a>
+            </div>
+        </div>
+    </div>
+    {%- endfor -%}
+</div>
+{%- endblock %}
